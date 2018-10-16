@@ -9,11 +9,11 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item =Item.new
+    @item = current_user.items.build
   end
 
   def create
-    @item = Item.new(params.require(:item).permit(:time,:description))
+    @item = current_user.items.build(params.require(:item).permit(:time,:description))
     if @item.save
       redirect_to root_path
     else
